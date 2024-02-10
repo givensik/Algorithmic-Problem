@@ -78,6 +78,8 @@ void resetButton(int** Clock, int ButtonNum, int N){
 // 초기값 Clock, 0, 
 void ClockSync(int **Clock, int ButtonNum, int cnt){
 	if(ButtonNum == 10) return ;
+
+
 	// 버튼을 0~3번 누르기
 	for(int i = 0; i < 4 ; i++){
 		// ButtonNum번의 버튼을 i번 누르기
@@ -142,6 +144,9 @@ int main(){
 	}
 
 	ClockSync(Clock, 0, 0);
+	if(res == 2000000){
+		res = -1;
+	}
 	printf("%d\n", res);
 	
 
