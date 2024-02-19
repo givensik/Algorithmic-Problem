@@ -32,7 +32,7 @@ int main(){
 
 	vector<int> C = multiply(A,B);
 
-	for(vector<int>::iterator itr = C.end(); itr != C.begin(); --itr){
+	for(vector<int>::iterator itr = C.end()-1; itr >= C.begin(); itr--){
 		cout << *itr;
 	}
 	
@@ -60,14 +60,20 @@ vector<int> multiply(const vector<int>& a, const vector<int>& b){
 void normalize(vector<int>& num){// num이 넘어가서 바뀌어야하니까 레퍼런스로 넘기기
 	num.push_back(0);
 
-	for(int i = 0; i<num.size(); i++){
+	for(int i = 0; i+1<num.size(); i++){
 		if(num[i] >= 10){
 			num[i+1] += num[i]/10;
 			num[i] = num[i]%10;
 		}
+		printf("num[%d] = %d\n",i,num[i]);
 	}
 
 
+	while(num.size()>1 && num.back() == 0){
+		num.pop_back();
+	}
+	
+	
 }
 
 
@@ -78,8 +84,8 @@ void normalize(vector<int>& num){// num이 넘어가서 바뀌어야하니까 �
 			15	18	21	24
 		10	12	14	16	
 	5	6	7	8
-
-
+32 52 61 60 34 16 5 0
+2  5  6  6  0  0  7
 
 
 */
