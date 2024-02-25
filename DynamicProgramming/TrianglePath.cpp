@@ -6,6 +6,8 @@ vector<vector<int>> a;
 
 int path(int y, int x, int sum);
 
+int cache[100][100];
+
 int main(){
 	int N;
 
@@ -26,18 +28,18 @@ int main(){
 	return 0;
 }
 
-int path(int y, int x, int sum){
-
-	// 범위를 넘어선 좌표
-	if(y == a.size() || x == a[y].size()){
-		return sum;
-	}
+int path(int y, int x){
 	// 가장 아래의 경로인 경우
 	if(y+1 == a.size()){
-		return sum + a[y][x];
+		return a[y][x];
 	}
-	int p1 = path(y+1,x,sum + a[y][x]);
-	int p2 = path(y+1,x+1,sum + a[y][x]);
 
-	return (p1 > p2) ? p1 : p2;
+	int& ret = cache[y][x];
+	
+	if(ret != -1){
+		return ret;
+	}
+
+	return ret = max(path(y+1,x),path(y+1,x+1)) + a[y][x];
+	
 }
