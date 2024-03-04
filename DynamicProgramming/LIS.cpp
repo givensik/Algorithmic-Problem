@@ -5,10 +5,11 @@ using namespace std;
 vector<int> S;
 
 int N;
+int cache[100];
 
 int lis(const vector<int>& S);
 
-int lis(int y, int x); // -> 이거로 메모이제이션 적용
+int lis(int x); // -> 이거로 메모이제이션 적용
 
 int main(){
 	cin >> N;
@@ -42,5 +43,23 @@ int lis(const vector<int>& S){
 		ret = max(ret, 1 + lis(B));	
 	}
 	
+	return ret;
+}
+
+int lis(int x){
+	
+	int& ret = cache[x];
+
+	if(ret != -1){
+		return ret;	
+	}
+
+	int cnt = 0;
+	ret = 1;
+	for(int i = x+1; i< S.size(); i++){
+		if(S[x] < S[i]){
+			ret = max(ret, lis(i)+1);
+		}
+	}
 	return ret;
 }
